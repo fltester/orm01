@@ -35,6 +35,9 @@ class Author(models.Model):
     # authorDetail=models.OneToOneField(to="AuthorDetail",to_field="nid",on_delete=models.CASCADE)
     au=models.OneToOneField("AuthorDetail",on_delete=models.CASCADE,null=True)
 
+    def __str__(self):
+        return self.name
+
 class AuthorDetail(models.Model):
     """
     作者详细信息表
@@ -65,3 +68,6 @@ class Book1(models.Model):
     price=models.DecimalField(max_digits=5,decimal_places=2)
     publishs=models.ForeignKey(to="Publish",on_delete=models.CASCADE,)
     authors=models.ManyToManyField('Author',)
+
+    def __str__(self):
+        return self.title

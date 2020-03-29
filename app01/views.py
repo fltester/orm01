@@ -89,7 +89,48 @@ class QueryView(View):
 
 
         #修改
-        models.Author.objects.filter(id=1).update(
-            name = "LYJJ"
-        )
+        # models.Author.objects.filter(id=1).update(
+        #     name = "LYJJ"
+        # )
+
+
+        #基于对象的跨表查询
+        #查询
+        #一对一
+        #正向查询 关系属性写在表1，通过表一查询表2的数据，叫做正向查询，反之叫反向查询
+        # obj = models.Author.objects.filter(name="fc")[0]
+        # ph = obj.au.telephone #对象.属性
+        # print(ph)
+
+        #反向查询
+        # obj = models.AuthorDetail.objects.get(telephone="666")
+        # na = obj.author.name  #对象.表名
+        # print(na)
+
+        #一对多 正向查询
+        # obj = models.Book1.objects.get(title="hlm")
+        # pna = obj.publishs.name
+        # print(pna)
+
+        #一对多反向查询
+        # obj = models.Publish.objects.filter(name="大幅度")[0]
+        # te = obj.book1_set.all()
+        # for i in  te:
+        #     print(i.title)
+        # print(te)
+
+
+
+        #多对多 正向查询
+        # obj = models.Book1.objects.filter(title="xyj").first()
+        # ret = obj.authors.all()
+        # for i in ret:
+        #     print(i.name)
+        # print(ret)
+
+        #多对多反向查询
+        obj = models.Author.objects.filter(name="fc").first()
+        ret = obj.book1_set.all()
+        for i in ret:
+            print(i.title)
         return HttpResponse("ok")
