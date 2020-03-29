@@ -62,12 +62,34 @@ class QueryView(View):
         #一对多和一对一写法一样
 
         #多对多
-        new_obj = models.Book1.objects.create(
-            title = "uuuuuu",
-            price = 7,
-            publishDate = "2019-08-05",
-            publishs_id = 3,
+        # new_obj = models.Book1.objects.create(
+        #     title = "uuuuuu",
+        #     price = 7,
+        #     publishDate = "2019-08-05",
+        #     publishs_id = 3,
+        #
+        # )
+        # new_obj.authors.add(1,4)
+        # new_obj.authors.add(*[1, 4])#既可以用id也可以用对象
 
+
+        #删除
+        #一对一
+        #models.AuthorDetail.objects.filter(id=3).delete()
+        #models.Author.objects.filter(id=2).delete()
+
+        #一对多
+        #models.Book1.objects.filter(id=1).delete()
+
+        #多对多
+        book_obj = models.Book1.objects.get(id=9)
+        #book_obj.authors.remove(1)#删除指定的一条
+        #book_obj.authors.clear()#清除所有的相关数据
+        #book_obj.authors.set([1,4])#先清除再添加
+
+
+        #修改
+        models.Author.objects.filter(id=1).update(
+            name = "LYJJ"
         )
-        new_obj.authors.add(1,4)#既可以用id也可以用对象
         return HttpResponse("ok")

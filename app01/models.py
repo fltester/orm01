@@ -39,7 +39,7 @@ class AuthorDetail(models.Model):
     """
     作者详细信息表
     """
-    birthday=models.DateField(default=datetime.now())
+    birthday=models.DateField()
     telephone=models.CharField(max_length=11,null=True)
     addr=models.CharField(max_length=64,null=True)
     # class Meta:
@@ -61,7 +61,7 @@ class Book1(models.Model):
     书籍表
     """
     title = models.CharField( max_length=32,null=True)
-    publishDate=models.DateField(default=datetime.now())
+    publishDate=models.DateField()
     price=models.DecimalField(max_digits=5,decimal_places=2)
     publishs=models.ForeignKey(to="Publish",on_delete=models.CASCADE,)
     authors=models.ManyToManyField('Author',)
